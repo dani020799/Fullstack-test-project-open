@@ -27,7 +27,7 @@ function App() {
                 setProducts(data);
 
             } catch (err) {
-                setError(err.message || "Error");
+                setError( "Falied");
 
             } finally {
                 setLoading(false);
@@ -36,7 +36,7 @@ function App() {
         };
          fetchproducts();
 
-    },[API_URL]);
+    },[]);
 
     // Handle form input changes
     const handleInputChange = (e) => {
