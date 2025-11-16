@@ -26,11 +26,35 @@ let products = [
 // GET /api/products - retrieve all products
 app.get('/api/products', (req, res) => {
     // IMPLEMENT FETCH PRODUCTS LOGIC
+    res.json(products);
 });
 
 // POST /api/products - add a new product
 app.post('/api/products', (req, res) => {
     // IMPLEMENT ADD PRODUCT LOGIC
+    const {name, category} =req.body;
+    if(!name && !category)
+    {
+        return res.status(400).json({message :'Name and category are empty'});
+    }
+    else if (!name)
+    {
+        return res.status(400).json({message :'Name is empty'}); 
+    }
+    else if (!category)
+    {
+          return res.status(400).json({message :'Category is empty'}); 
+    }
+
+    const newProduct={
+         id: Math.random().toString(),
+         name,
+         category,
+         createdAt :new Date().toISOString(),
+    };
+    products.push(newProduct);
+    return res.status(201).json(newProduct);
+    
 });
 
 // Start the server
